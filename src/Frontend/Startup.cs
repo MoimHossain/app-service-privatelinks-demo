@@ -27,6 +27,8 @@ namespace Frontend
 
             // Add our Config object so it can be injected
             services.Configure<FrontendConfiguration>(Configuration.GetSection("FrontendConfiguration"));
+            services.AddHttpClient();
+            services.AddSingleton<ApiAgent>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +45,7 @@ namespace Frontend
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

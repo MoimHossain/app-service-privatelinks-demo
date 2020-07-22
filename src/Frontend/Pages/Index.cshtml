@@ -1,34 +1,18 @@
 ﻿@page
 @model IndexModel
 @inject Microsoft.Extensions.Options.IOptions<FrontendConfiguration> Config
+@inject Frontend.ApiAgent agent
 @{
     ViewData["Title"] = "Home page";
 
     ViewData["URL"] = Config.Value.BackendHost;
 
-    var httpClient = new System.Net.Http.HttpClient();
 
-    try
-    {
-        var response = await httpClient.GetAsync($"{Config.Value.BackendHost}weatherforecast");
 
-        if (response.IsSuccessStatusCode)
-        {
-            ViewData["Status"] = "Successfully connected to backend";
-            ViewData["Body"] = await response.Content.ReadAsStringAsync();
-        }else
-        {
-            ViewData["Status"] = "Failed to connect to backend";
-            ViewData["Body"] = $"Status code: {response.StatusCode} and Message: {await response.Content.ReadAsStringAsync()}";
-        }
-    }
-    catch (Exception ex)
-    {
-        ViewData["Status"] = "Exception Occured";
-        ViewData["Body"] = ex.Message;
-    }
+    ViewData["Status"] = "------";
+    ViewData["Body"] = await agent.GetResponseAsync();
+
 }
-
     <div class="text-center">
         <h1 class="display-4">Welcome</h1>
         <p>Backend URL: @ViewData["URL"] </p>
