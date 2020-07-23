@@ -25,10 +25,10 @@ namespace Frontend
             var all = new StringBuilder();
             try
             {
-                //var url = "http://backend-moimha.azurewebsites.net/weatherforecast";
+                //var url = "http://backend-moimha.azurewebsites.net/info";
                 //var request = new HttpRequestMessage(HttpMethod.Get, url);
 
-                var url = "http://10.2.0.5/weatherforecast";
+                var url = "http://10.2.0.5/info";
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Host", "backend-moimha.azurewebsites.net");
 
